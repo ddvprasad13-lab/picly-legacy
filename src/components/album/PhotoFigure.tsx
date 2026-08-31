@@ -6,7 +6,7 @@ type Props = {
   onOpen?: () => void;
   className?: string;
   /** aspect-ratio css value, e.g. "3/4". Defaults to the photo ratio. */
-  aspect?: string;
+  aspect?: string | undefined;
   delay?: number;
   priority?: boolean;
   sizes?: string;

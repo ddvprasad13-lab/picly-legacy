@@ -12,8 +12,8 @@ export function Gallery({
 }: {
   photos: Photo[];
   className?: string;
-  itemClassName?: string;
-  aspect?: string;
+  itemClassName?: string | undefined;
+  aspect?: string | undefined;
 }) {
   const [open, setOpen] = useState<number | null>(null);
 
@@ -24,9 +24,9 @@ export function Gallery({
           <PhotoFigure
             key={i}
             photo={p}
-            aspect={aspect}
+            {...(aspect ? { aspect } : {})}
             delay={(i % 4) * 70}
-            className={itemClassName}
+            className={itemClassName ?? ""}
             onOpen={() => setOpen(i)}
             sizes="(max-width: 768px) 50vw, 25vw"
           />
