@@ -351,19 +351,37 @@ function Wedding() {
 
 /* 9. THE PEOPLE WE LOVE ------------------------------------------------- */
 function People() {
+  const p = sections.family.photos;
+  const [open, setOpen] = useState<number | null>(null);
+  const spans = [
+    "md:col-span-8",
+    "md:col-span-4 md:mt-16",
+    "md:col-span-4",
+    "md:col-span-4 md:mt-12",
+    "md:col-span-4",
+    "md:col-span-12",
+  ];
+  const aspects = ["4/3", "3/4", "3/4", "4/3", "3/4", "21/9"];
+
   return (
     <section className="bg-secondary/60 px-6 py-24 md:px-12 md:py-36">
       <div className="mx-auto max-w-6xl">
         <SectionTitle title="The People We Love" caption={sections.family.message} />
-        <div className="mt-14">
-          <Gallery
-            photos={sections.family.photos}
-            className="grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-6"
-            itemClassName="md:[&:nth-child(1)]:col-span-4 md:[&:nth-child(2)]:col-span-2 md:[&:nth-child(2)]:mt-14 md:[&:nth-child(3)]:col-span-2 md:[&:nth-child(4)]:col-span-2 md:[&:nth-child(5)]:col-span-2 md:[&:nth-child(6)]:col-span-6"
-            aspect="4/3"
-          />
+        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-12 md:gap-6">
+          {p.map((photo, i) => (
+            <PhotoFigure
+              key={i}
+              photo={photo}
+              aspect={aspects[i] ?? "4/3"}
+              className={spans[i] ?? "md:col-span-4"}
+              delay={(i % 3) * 80}
+              onOpen={() => setOpen(i)}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          ))}
         </div>
       </div>
+      <Lightbox photos={p} index={open} onClose={() => setOpen(null)} onIndexChange={setOpen} />
     </section>
   );
 }
