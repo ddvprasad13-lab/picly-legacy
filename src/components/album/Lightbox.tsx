@@ -40,6 +40,7 @@ export function Lightbox({ photos, index, onClose, onIndexChange }: Props) {
 
   if (!open || index === null) return null;
   const photo = photos[index];
+  if (!photo) return null;
 
   return (
     <div
@@ -48,10 +49,11 @@ export function Lightbox({ photos, index, onClose, onIndexChange }: Props) {
       aria-modal="true"
       aria-label="Photograph viewer"
       onTouchStart={(e) => {
-        touchX.current = e.touches[0].clientX;
+        touchX.current = e.touches[0]?.clientX ?? null;
       }}
       onTouchMove={(e) => {
-        if (touchX.current !== null) setDrag(e.touches[0].clientX - touchX.current);
+        const x = e.touches[0]?.clientX;
+        if (touchX.current !== null && x !== undefined) setDrag(x - touchX.current);
       }}
       onTouchEnd={() => {
         if (Math.abs(drag) > 55) go(drag < 0 ? 1 : -1);
