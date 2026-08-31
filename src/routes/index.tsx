@@ -358,8 +358,9 @@ function People() {
         <div className="mt-14">
           <Gallery
             photos={sections.family.photos}
-            className="masonry"
-            itemClassName="masonry-item"
+            className="grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-6"
+            itemClassName="md:[&:nth-child(1)]:col-span-4 md:[&:nth-child(2)]:col-span-2 md:[&:nth-child(2)]:mt-14 md:[&:nth-child(3)]:col-span-2 md:[&:nth-child(4)]:col-span-2 md:[&:nth-child(5)]:col-span-2 md:[&:nth-child(6)]:col-span-6"
+            aspect="4/3"
           />
         </div>
       </div>
